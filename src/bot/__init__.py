@@ -18,7 +18,6 @@ async def run_bot():
         while True:
             await asyncio.sleep(3600)
             ADMIN_MESSAGES.clear()
-            print('cleared')
 
     asyncio.create_task(messages_worker())
     await bot.delete_webhook(True)

@@ -135,7 +135,6 @@ async def album_handler(messages: list[Message], state: FSMContext):
 @user_router.message(StateFilter(user_states.EditDraft))
 async def handle_edit_draft(message: Message, state: FSMContext):
     state_data = await state.get_data()
-    print(await state.get_state(), state_data)
     what = state_data["what"]
     what_kword = state_data["what_kword"]
     draft_id = state_data["draft_id"]
@@ -202,7 +201,6 @@ async def handle_user_call(call: CallbackQuery, state: FSMContext):
                 else: await call.message.edit_text(user_texts.view_drafts, reply_markup=user_keyboards.view_drafts(user_drafts))
 
         elif data[1] == "anonymity":
-            print(data)
             draft_create = SharedResultDraftCreate(user_id=user_id)
             if data[2] == "view": return call.message.edit_text(user_texts.share_result_anonymity.replace('*', call.from_user.full_name), reply_markup=user_keyboards.share_result_anonymity)
             elif data[2] == "no": draft_create.author = f"@{call.from_user.username}" or call.from_user.full_name
